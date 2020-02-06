@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, ImageBackground, Alert, TouchableOpacity, } from 'react-native';
-//import { Icon, ListItem } from 'react-native-elements';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { IconButton, Colors, ProgressBar} from 'react-native-paper';
 import R from '../res/R';
 import CountDown from 'react-native-countdown-component';
@@ -15,18 +15,18 @@ const customStyles = {
   currentStepStrokeWidth: 0,
   stepStrokeCurrentColor: '#9AE7E0',
   stepStrokeWidth: 0,
-  stepStrokeFinishedColor: '#FFFFFF',
-  stepStrokeUnFinishedColor: '#aaaaaa',
-  separatorFinishedColor: '#9AE7E0',
-  separatorUnFinishedColor: '#aaaaaa',
+  // stepStrokeFinishedColor: '#FFFFFF',
+  // stepStrokeUnFinishedColor: '#aaaaaa',
+  // separatorFinishedColor: '#9AE7E0',
+  // separatorUnFinishedColor: '#aaaaaa',
   stepIndicatorFinishedColor: '#FFFFFF',
   stepIndicatorUnFinishedColor: '#9AE7E0',
-  stepIndicatorCurrentColor: '#9AE7E0',
+  // stepIndicatorCurrentColor: '#9AE7E0',
   stepIndicatorLabelFontSize: 0,
   currentStepIndicatorLabelFontSize:0,
-  stepIndicatorLabelCurrentColor: '#FFFFFF',
-  stepIndicatorLabelFinishedColor: '#9AE7E0',
-  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+  stepIndicatorLabelCurrentColor: 'transparent',
+  stepIndicatorLabelFinishedColor: 'transparent',
+  stepIndicatorLabelUnFinishedColor: 'transparent',
   labelColor: '#999999',
   labelSize: 0,
   currentStepLabelColor: '#FFFFFF'
@@ -64,15 +64,15 @@ class PlayScreen extends Component {
   render() {
     return (
       <ImageBackground source={R.images.background} style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView >
+        <View style={{flex:1}} >
           <View style={styles.container}>
             <View style={styles.top}>
-              <View style={{ flexDirection: 'row', paddingTop: 30, paddingLeft:20, paddingRight:24, alignItems: 'center', justifyContent: 'space-between' }}>
+              <View style={{ flexDirection: 'row', paddingTop: hp('3.6%'), paddingLeft:20, paddingRight:24, alignItems: 'center', justifyContent: 'space-between' }}>
                 <IconButton icon={R.images.back} color='white' size={24} onPress={() => this.props.navigation.goBack()} />
                 <Text style={{fontSize:18, fontWeight:'bold', color:'white'}}>5 / 21</Text>
                 <View style={{ width: 24 }}></View>
               </View>
-              <View style={{paddingLeft:24, paddingRight:24, paddingTop:15}}>
+              <View style={{paddingLeft:24, paddingRight:24, paddingTop:hp('1%')}}>
                 <StepIndicator
                   customStyles={customStyles}
                   currentPosition={this.state.currentPosition}
@@ -80,12 +80,12 @@ class PlayScreen extends Component {
                 />
               </View>
             </View>
-            <View style={styles.mid}>
-              <View style={{paddingTop:30,paddingBottom:10}}>
-                <Text style={{fontSize:24, fontWeight:'bold', color:'#55D3CB'}}>Бег, колени вверх</Text>
-              </View>
-              <Image source={R.images.yoga} style={{width:232, height:268}}/>
-              <View style={{paddingTop:10}}>
+            <View style={styles.mid}>             
+              <Text style={{fontSize:24, fontWeight:'bold', color:'#55D3CB',paddingTop:hp('2.5%')}}>Бег, колени вверх</Text>
+              <Image source={R.images.yoga}
+                resizeMode = 'contain'
+                style={{padding:'10%'}}
+               />              
                 <CountDown
                   size={42}
                   until={this.state.timer}                               
@@ -99,14 +99,13 @@ class PlayScreen extends Component {
                   onChange={()=> this.updateProgressBar()}
                   onFinish={() => this.props.navigation.navigate('Finish')}
                 />
-              </View>                
+                            
             </View>
-           
-              <ProgressBar progress={this.state.currentProgress} color='#55D3CB' />   
-             
             <View style={styles.bottom}> 
-            <View style={{height:2, backgroundColor:'rgba(85, 211, 203, 0.1)'}}></View>
-            <IconButton icon={ R.images.pause} color='#55D3CB' size={56} onPress={() => this.openDialog(true)} />
+            <ProgressBar progress={this.state.currentProgress} color='#55D3CB' />   
+            <View style={{alignItems:'center'}}>
+             <IconButton icon={ R.images.pause} color='#55D3CB' size={56} onPress={() => this.openDialog(true)} />
+            </View>
             </View>
           </View>
           <Dialog
@@ -136,27 +135,27 @@ class PlayScreen extends Component {
                   }
                   style={
                     {
-                      width:144,
-                      height:232,
-                      marginTop:20
+                      // width:hp('61.5%'),
+                      // height:hp('28.5%'),
+                      marginTop:hp('2.5%')
 
                     }
                   }
                 />
               </View>              
-              <TouchableOpacity activeOpacity={0.5} onPress={() => this.goPush()} style={{paddingLeft:20, paddingRight:20, paddingTop:20,paddingBottom:10}} >
-                <View style={{ alignItems: "center", justifyContent: "center", backgroundColor:'red', height:46 }}>
+              <TouchableOpacity activeOpacity={0.5} onPress={() => this.goPush()} style={{paddingLeft:20, paddingRight:20, paddingTop:hp('2.5%'),paddingBottom:hp('1.2%')}} >
+                <View style={{ alignItems: "center", justifyContent: "center", backgroundColor:'red', height:hp('5.96%') }}>
                 <Text style={{color:'#B8B8B8', fontSize:22, fontWeight:'bold'}}>STOP</Text>
                   </View>
               </TouchableOpacity>
               
-              <TouchableOpacity activeOpacity={0.5} onPress={() => this.openDialog(false)}  style={{paddingLeft:20, paddingRight:20, paddingBottom:20}}>
-                <View style={{ alignItems: "center", justifyContent: "center", backgroundColor:'white', height:46, borderColor:'#B8B8B8',borderBottomWidth:1,borderTopWidth:1, borderLeftWidth:1,borderRightWidth:1 }}>
+              <TouchableOpacity activeOpacity={0.5} onPress={() => this.openDialog(false)}  style={{paddingLeft:20, paddingRight:20, paddingBottom:hp('2.5%')}}>
+                <View style={{ alignItems: "center", justifyContent: "center", backgroundColor:'white', height:hp('5.96%'), borderColor:'#B8B8B8',borderBottomWidth:1,borderTopWidth:1, borderLeftWidth:1,borderRightWidth:1 }}>
                 <Text style={{color:'#B8B8B8', fontSize:22, fontWeight:'bold'}}>CANCEL</Text>
                   </View>
               </TouchableOpacity>
               </Dialog>
-        </SafeAreaView>
+        </View>
       </ImageBackground>
     );
   }
@@ -167,23 +166,23 @@ class PlayScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    
+    flex:1,
     alignItems: 'stretch',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
 
   },
   top: {
-    height: 120,
+    height: hp('15%'),
   },
-  mid: {      
+  mid: { 
+    justifyContent:'space-evenly', 
     alignItems: 'center',    
     backgroundColor:'white',
-    
+    flex:1
   },
   bottom: {
-    height:400,   
-   justifyContent:'flex-start',
-   alignItems:'center',
+    height:hp('15%'),   
+   justifyContent:'space-around',   
    backgroundColor:'white',
    
   }

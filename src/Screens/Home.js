@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, ImageBackground, Alert, TouchableOpacity } from 'react-native';
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Icon, ListItem } from 'react-native-elements';
 import R from '../res/R';
 import { FlatList } from 'react-native-gesture-handler';
@@ -125,8 +125,8 @@ class HomeScreen extends Component {
             <Image source={item.avatar_url} />
           </View>
           <View style={{ paddingLeft: 20 }}>
-            <Text>{item.name}</Text>
-            <Text>{item.subtitle}</Text>
+            <Text style={{color: '#55D3CB'}}>{item.name}</Text>
+            <Text style={{color: '#55D3CB'}}>{item.subtitle}</Text>
           </View>
           <View style={{ right: 20, position: 'absolute' }}>
             <Image source={R.images.activebutton} />
@@ -141,16 +141,16 @@ class HomeScreen extends Component {
 
     return (
       <ImageBackground source={R.images.background} style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
 
           <View style={styles.top} >
-            <View style={{ height: 35, }}></View>
+            <View style={{ height: hp('4%'), }}></View>
             <Text style={styles.title}>День 6</Text>
-            <View style={{ height: 20 }}></View>
+            <View style={{ height: hp('2%') }}></View>
             <View style={styles.time}>
               <TouchableOpacity activeOpacity={0.5} >
                 <View style={styles.count}>
-                  <Icon name='reorder' size={24} color='#F8FEFD' />
+                  <Icon name='reorder' size={hp('3%')} color='#F8FEFD' />
                   <Text style={{ paddingLeft: 10, color: '#F8FEFD' }}>20 упражнений</Text>
                 </View>
               </TouchableOpacity>
@@ -164,17 +164,17 @@ class HomeScreen extends Component {
           </View>
 
           <FlatList
-            style={{ backgroundColor: '#F8FEFD', paddingTop: 30, paddingLeft: 20 }}
+            style={{ backgroundColor: '#F8FEFD', paddingTop: hp('3.6%'), paddingLeft: 20 }}
             data={this.state.list}
             keyExtractor={item => item.id}
             renderItem={this.renderItem}
           />
 
           <View style={styles.bottom}>
-            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.1)' }}></View>
-            <View style={{ height: 24 }}></View>
+            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.2)' }}></View>
+            <View style={{ height: hp('3%') }}></View>
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', }}>
-              <View style={{ width: 32 }}></View>
+              <View style={{ width: hp('4%') }}></View>
               <TouchableOpacity activeOpacity={0.5} onPress={() => this.openDialog(true)}>
                 <Image source={R.images.play} />
               </TouchableOpacity >
@@ -200,14 +200,14 @@ class HomeScreen extends Component {
             visible={this.state.showDialog}
             >
             
-            <View style={{ alignItems: "center", justifyContent: "center", paddingLeft:20, paddingRight:20, paddingBottom:30 }}>
+            <View style={{ alignItems: "center", justifyContent: "center", paddingLeft:20, paddingRight:20, paddingBottom:hp('3.6%') }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#55D3CB' }}>Растяжка мышц поясницы</Text>
               <Text style={{ fontSize: 18, }}>      </Text>
               <Text style={{ fontSize: 14, color: '#97BBBB' }}>Сядьте на пол, правую ногу переведите вперёд, левую — назад. </Text>
               <Text style={{ fontSize: 4, }}></Text>
               <Text style={{ fontSize: 14, color: '#97BBBB' }}>Согните ноги в коленях под углом 90 градусов или чуть больше. Правую руку положите на пол, левую поднимите над головой.</Text>
             </View>
-            <View style={{justifyContent:'center', alignItems:'center', paddingBottom:30}}>
+            <View style={{justifyContent:'center', alignItems:'center', paddingBottom:hp('3.6%')}}>
             <Image
               source={
                 R.images.image3
@@ -216,14 +216,14 @@ class HomeScreen extends Component {
             />
             </View>
             
-            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.1)', alignItems:'stretch', }}></View>
-            <View style={{ height:60, justifyContent:'center', alignItems:'center', }}>
+            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.2)', alignItems:'stretch', }}></View>
+            <View style={{ height:hp('7.3%'), justifyContent:'center', alignItems:'center', }}>
               <TouchableOpacity activeOpacity={0.5} onPress={() => this.goPush()}>
                 <Text style={{ fontSize: 14, color: '#55D3CB' }}>Закрыть</Text>
               </TouchableOpacity>
             </View>
           </Dialog>
-        </SafeAreaView>
+        </View>
       </ImageBackground>
     );
   }
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
 
   },
   top: {
-    height: 140,
+    height: hp('19%'),
   },
   title: {
     fontStyle: 'normal',
@@ -248,25 +248,25 @@ const styles = StyleSheet.create({
   },
   time: {
     flexDirection: 'row',
-    height: 24,
+    height: hp('3%'),
     alignItems: 'stretch',
     justifyContent: 'space-between',
-    // paddingBottom: 10
+    //paddingBottom: 20
   },
   count: {
     flexDirection: 'row',
-    width: 156,
-    height: 24,
+    width: wp('40%'),
+    height: hp('3%'),
     paddingLeft: 32,
   },
   timer: {
     flexDirection: 'row',
-    width: 156,
-    height: 24,
+    width: wp('38%'),
+    height: hp('3%'),
     paddingRight: 32,
   },
   bottom: {
-    height: 100,
+    height: hp('15%'),
     backgroundColor: '#F8FEFD',
   }
 });

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import R from '../res/R';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -114,7 +115,7 @@ class CheckScreen extends Component {
   }
 
 
-  renderItem = ({ item }) => {
+   renderItem = ({ item }) => {
     return (
       <TouchableOpacity activeOpacity={0.5} onPress={() => this.openDialog(true)}>
         <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
@@ -122,8 +123,8 @@ class CheckScreen extends Component {
             <Image source={item.avatar_url} />
           </View>
           <View style={{ paddingLeft: 20 }}>
-            <Text>{item.name}</Text>
-            <Text>{item.subtitle}</Text>
+            <Text style={{color: '#55D3CB'}}>{item.name}</Text>
+            <Text style={{color: '#55D3CB'}}>{item.subtitle}</Text>
           </View>
           <View style={{ right: 20, position: 'absolute' }}>
             <Image source={R.images.activebutton} />
@@ -138,20 +139,17 @@ class CheckScreen extends Component {
 
     return (
       <ImageBackground source={R.images.background} style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView style={styles.container}>
-
-          
+        <View style={styles.container}>          
           <FlatList
-            style={{ backgroundColor: '#F8FEFD', paddingTop: 50, paddingLeft: 20 }}
+            style={{ backgroundColor: '#F8FEFD', paddingTop: hp('6.15%'), paddingLeft: 20 }}
             data={this.state.list}
             keyExtractor={item => item.id}
             renderItem={this.renderItem}
           />
 
           <View style={styles.bottom}>
-            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.1)' }}></View>
-            <View style={{ height: 24 }}></View>
-            <View style={{ justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', }}>
+            <View style={{ height: 2, backgroundColor: 'rgba(85, 211, 203, 0.2)' }}></View>            
+            <View style={{ justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row', flex:1 }}>
               <View style={{ width: 32 }}></View>
               <TouchableOpacity activeOpacity={0.5} onPress={() => this.props.navigation.popToTop()} >
                 <Image source={R.images.confirm} />
@@ -162,7 +160,7 @@ class CheckScreen extends Component {
             </View>
           </View>
          
-        </SafeAreaView>
+        </View>
       </ImageBackground>
     );
   }
@@ -173,12 +171,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'flex-start',
-
+    
   },
   
   bottom: {
-    height: 100,
+    height:  hp('15%'),
     backgroundColor: '#F8FEFD',
+    justifyContent:'flex-start'
   }
 });
 
